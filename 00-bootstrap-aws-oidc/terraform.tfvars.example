@@ -1,0 +1,3 @@
+tfc_organization     = "your-org-name"
+tfc_project_name     = "vpc-peering-vcs-driven"
+create_oidc_provider = true
