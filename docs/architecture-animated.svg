@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" width="980" height="600" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<style>
+  .t  { font-size:13px; fill:#1F2328; text-anchor:middle; }
+  .h  { font-size:16px; font-weight:700; fill:#1F2328; text-anchor:middle; }
+  .s  { font-size:11px; fill:#57606A; text-anchor:middle; }
+  .ws { font-size:13px; font-weight:600; fill:#3B1F5E; text-anchor:middle; }
+  .ok { font-size:15px; font-weight:700; fill:#1F9D55; text-anchor:middle; }
+  .step { font-size:12px; font-weight:600; fill:#ffffff; text-anchor:middle; }
+  .arrow { stroke:#8C959F; stroke-width:1.6; fill:none; marker-end:url(#ah); }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#8C959F"/>
+  </marker>
+  <path id="p_push" d="M95 112 L95 178"/>
+  <path id="p_hook" d="M170 250 L205 250 L205 186 L232 186"/>
+  <path id="p_hook2" d="M170 250 L205 250 L205 186 L215 186 L215 140 L430 140 L430 168"/>
+  <path id="p_oidc" d="M598 330 L640 330 L690 330"/>
+</defs>
+
+<rect x="0" y="0" width="980" height="600" fill="#ffffff"/>
+<text x="490" y="30" class="h" style="font-size:19px">VPC Peering — VCS-driven workflow with HCP Terraform, OPA and OIDC</text>
+
+<!-- ============ ENGINEER + GITHUB ============ -->
+<rect x="20" y="62" width="150" height="50" rx="10" fill="#F6F8FA" stroke="#57606A" stroke-width="1.5"/>
+<text x="95" y="84" class="t" style="font-weight:600">Engineer laptop</text>
+<text x="95" y="101" class="s">Terraform code + git</text>
+
+<rect x="20" y="180" width="150" height="150" rx="10" fill="#F6F8FA" stroke="#24292F" stroke-width="2"/>
+<text x="95" y="203" class="h">GitHub</text>
+<rect x="35" y="216" width="120" height="28" rx="6" fill="#fff" stroke="#8C959F"/>
+<text x="95" y="235" class="s">feature branch → PR</text>
+<path d="M95 244 L95 262" class="arrow"/>
+<rect x="35" y="264" width="120" height="28" rx="6" fill="#fff" stroke="#8C959F"/>
+<text x="95" y="283" class="s">main (protected)</text>
+<text x="95" y="314" class="s">merge = deploy</text>
+
+<path d="M95 112 L95 178" class="arrow"/>
+<text x="120" y="150" class="s" style="text-anchor:start">git push</text>
+
+<!-- ============ HCP TERRAFORM ============ -->
+<rect x="205" y="56" width="400" height="500" rx="12" fill="#FBF9FE" stroke="#7B42BC" stroke-width="2"/>
+<text x="405" y="80" class="h" style="fill:#7B42BC">HCP Terraform — project vpc-peering-vcs-driven</text>
+
+<!-- OPA gate -->
+<rect x="225" y="92" width="360" height="34" rx="8" fill="#FFF8E1" stroke="#D4A72C" stroke-width="1.5"/>
+<rect x="225" y="92" width="360" height="34" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.270;0.290;0.960;1"/></rect>
+<text x="405" y="114" class="t" style="font-weight:600">OPA policy check: plan → input.plan → pass ✓ / block ✗</text>
+
+<g>
+  <rect x="232" y="165" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="232" y="165" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.220;0.240;0.960;1"/></rect>
+  <text x="307.0" y="192" class="ws">fe-network-ws</text>
+  <text x="368" y="193" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.250;0.270;0.960;1"/></text>
+</g>
+<g>
+  <rect x="428" y="165" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="428" y="165" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.220;0.240;0.960;1"/></rect>
+  <text x="503.0" y="192" class="ws">be-network-ws</text>
+  <text x="564" y="193" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.250;0.270;0.960;1"/></text>
+</g>
+<g>
+  <rect x="232" y="255" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="232" y="255" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.470;0.490;0.960;1"/></rect>
+  <text x="307.0" y="282" class="ws">fe-security-ws</text>
+  <text x="368" y="283" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.500;0.520;0.960;1"/></text>
+</g>
+<g>
+  <rect x="428" y="255" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="428" y="255" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.470;0.490;0.960;1"/></rect>
+  <text x="503.0" y="282" class="ws">be-security-ws</text>
+  <text x="564" y="283" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.500;0.520;0.960;1"/></text>
+</g>
+<g>
+  <rect x="232" y="345" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="232" y="345" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.550;0.570;0.960;1"/></rect>
+  <text x="307.0" y="372" class="ws">fe-compute-ws</text>
+  <text x="368" y="373" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.580;0.600;0.960;1"/></text>
+</g>
+<g>
+  <rect x="428" y="345" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="428" y="345" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.550;0.570;0.960;1"/></rect>
+  <text x="503.0" y="372" class="ws">be-compute-ws</text>
+  <text x="564" y="373" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.580;0.600;0.960;1"/></text>
+</g>
+<g>
+  <rect x="330" y="440" width="150" height="44" rx="8" fill="#F3EEFA" stroke="#7B42BC" stroke-width="1.5"/>
+  <rect x="330" y="440" width="150" height="44" rx="8" fill="#D9F2E3" stroke="#1F9D55" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.630;0.650;0.960;1"/></rect>
+  <text x="405.0" y="467" class="ws">vpc-peering</text>
+  <text x="466" y="468" class="ok" opacity="0">✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.660;0.680;0.960;1"/></text>
+</g>
+
+<!-- run trigger arrows -->
+<path d="M307 209 L307 253" class="arrow"/>
+<path d="M503 209 L503 253" class="arrow"/>
+<path d="M307 299 L307 343" class="arrow"/>
+<path d="M503 299 L503 343" class="arrow"/>
+<path d="M262 299 L262 318 L218 318 L218 462 L328 462" class="arrow"/>
+<path d="M560 299 L560 320 L595 320 L595 462 L482 462" class="arrow"/>
+<text x="405" y="236" class="s">run triggers</text>
+<text x="405" y="530" class="s">project variable set · OPA policy set · created by workspace-runner</text>
+
+<!-- ============ OIDC ============ -->
+<circle cx="645" cy="330" r="26" fill="#fff" stroke="#0969DA" stroke-width="2"/>
+<circle cx="645" cy="330" r="26" fill="#DDF4FF" stroke="#0969DA" stroke-width="3" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.300;0.320;0.960;1"/></circle>
+<text x="645" y="335" class="t" style="font-weight:700;fill:#0969DA">OIDC</text>
+<text x="645" y="374" class="s">short-lived</text>
+<text x="645" y="388" class="s">token, no keys</text>
+<path d="M605 330 L617 330" class="arrow"/>
+<path d="M671 330 L688 330" class="arrow"/>
+
+<!-- ============ AWS ============ -->
+<rect x="690" y="56" width="270" height="500" rx="12" fill="#FFFBF5" stroke="#FF9900" stroke-width="2"/>
+<text x="825" y="80" class="h" style="fill:#C46A00">AWS ap-southeast-1</text>
+<text x="825" y="98" class="s">IAM role trusts only this org + project</text>
+<rect x="736" y="540" width="14" height="9" rx="2" fill="#ED7100"/><text x="756" y="549" class="s" style="text-anchor:start">= EC2 instance (t3.micro)</text>
+
+<g opacity="0.25"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0.25;0.25;1;1;0.25" keyTimes="0;0.400;0.420;0.960;1"/><rect x="710" y="112" width="230" height="160" rx="10" fill="#fff" stroke="#8C4FFF" stroke-width="2"/><text x="825" y="134" class="t" style="font-weight:700">Frontend VPC 10.6.0.0/16</text><rect x="722" y="146" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="754" y="162" class="s" style="font-size:10px">public 1</text><rect x="722" y="196" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="754" y="212" class="s" style="font-size:10px">private 1</text><rect x="793" y="146" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="825" y="162" class="s" style="font-size:10px">public 2</text><rect x="793" y="196" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="825" y="212" class="s" style="font-size:10px">private 2</text><rect x="864" y="146" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="896" y="162" class="s" style="font-size:10px">public 3</text><rect x="864" y="196" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="896" y="212" class="s" style="font-size:10px">private 3</text><text x="825" y="258" class="s">IGW · NAT GW · route tables · SGs</text></g><g opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.570;0.590;0.960;1"/><rect x="744" y="168" width="20" height="12" rx="3" fill="#ED7100"/><rect x="744" y="218" width="20" height="12" rx="3" fill="#ED7100"/><rect x="815" y="218" width="20" height="12" rx="3" fill="#ED7100"/><rect x="886" y="218" width="20" height="12" rx="3" fill="#ED7100"/></g>
+<g opacity="0.25"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0.25;0.25;1;1;0.25" keyTimes="0;0.400;0.420;0.960;1"/><rect x="710" y="372" width="230" height="160" rx="10" fill="#fff" stroke="#8C4FFF" stroke-width="2"/><text x="825" y="394" class="t" style="font-weight:700">Backend VPC 172.16.0.0/16</text><rect x="722" y="406" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="754" y="422" class="s" style="font-size:10px">public 1</text><rect x="722" y="456" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="754" y="472" class="s" style="font-size:10px">private 1</text><rect x="793" y="406" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="825" y="422" class="s" style="font-size:10px">public 2</text><rect x="793" y="456" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="825" y="472" class="s" style="font-size:10px">private 2</text><rect x="864" y="406" width="64" height="40" rx="5" fill="#E9F5E1" stroke="#7AA116"/><text x="896" y="422" class="s" style="font-size:10px">public 3</text><rect x="864" y="456" width="64" height="40" rx="5" fill="#E6F4F8" stroke="#00A4A6"/><text x="896" y="472" class="s" style="font-size:10px">private 3</text><text x="825" y="518" class="s">IGW · NAT GW · route tables · SGs</text></g><g opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.570;0.590;0.960;1"/><rect x="744" y="428" width="20" height="12" rx="3" fill="#ED7100"/><rect x="744" y="478" width="20" height="12" rx="3" fill="#ED7100"/><rect x="815" y="478" width="20" height="12" rx="3" fill="#ED7100"/><rect x="886" y="478" width="20" height="12" rx="3" fill="#ED7100"/></g>
+
+<!-- peering link -->
+<g opacity="0.15"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0.15;0.15;1;1;0.15" keyTimes="0;0.680;0.700;0.960;1"/>
+  <line x1="825" y1="274" x2="825" y2="370" stroke="#D13212" stroke-width="4" stroke-dasharray="8 5">
+    <animate attributeName="stroke-dashoffset" values="0;-26" dur="1s" repeatCount="indefinite"/>
+  </line>
+  <rect x="742" y="306" width="166" height="30" rx="15" fill="#fff" stroke="#D13212" stroke-width="2"/>
+  <text x="825" y="326" class="t" style="font-weight:700;fill:#D13212">VPC peering · active</text>
+</g>
+
+<!-- ============ STEP BANNER ============ -->
+<g>
+  <rect x="20" y="370" width="170" height="186" rx="10" fill="#F6F8FA" stroke="#D0D7DE"/>
+  <text x="105" y="392" class="t" style="font-weight:700">Flow</text>
+  <text x="30" y="414" class="s" style="text-anchor:start">1  push → PR → merge</text>
+  <text x="30" y="434" class="s" style="text-anchor:start">2  webhook starts network</text>
+  <text x="30" y="454" class="s" style="text-anchor:start">3  plan → OPA check</text>
+  <text x="30" y="474" class="s" style="text-anchor:start">4  OIDC → temp AWS creds</text>
+  <text x="30" y="494" class="s" style="text-anchor:start">5  run triggers chain</text>
+  <text x="30" y="514" class="s" style="text-anchor:start">6  peering connects VPCs</text>
+  <rect x="34" y="526" width="142" height="22" rx="11" fill="#1F9D55" opacity="0"><animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.740;0.760;0.960;1"/></rect>
+  <text x="105" y="541" class="step" opacity="0">All 7 applied ✓<animate attributeName="opacity" dur="14s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.740;0.760;0.960;1"/></text>
+</g>
+
+<!-- ============ MOVING DOTS ============ -->
+<circle r="7" fill="#24292F" opacity="0">
+  <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+     keyPoints="0;0;1;1" keyTimes="0;0.020;0.100;1"><mpath href="#p_push"/></animateMotion>
+  <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+     values="0;0;1;1;0;0" keyTimes="0;0.020;0.025;0.100;0.105;1"/>
+</circle>
+<circle r="7" fill="#7B42BC" opacity="0">
+  <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+     keyPoints="0;0;1;1" keyTimes="0;0.120;0.200;1"><mpath href="#p_hook"/></animateMotion>
+  <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+     values="0;0;1;1;0;0" keyTimes="0;0.120;0.125;0.200;0.205;1"/>
+</circle>
+<circle r="7" fill="#7B42BC" opacity="0">
+  <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+     keyPoints="0;0;1;1" keyTimes="0;0.120;0.220;1"><mpath href="#p_hook2"/></animateMotion>
+  <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+     values="0;0;1;1;0;0" keyTimes="0;0.120;0.125;0.220;0.225;1"/>
+</circle>
+<circle r="7" fill="#0969DA" opacity="0">
+  <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+     keyPoints="0;0;1;1" keyTimes="0;0.300;0.380;1"><mpath href="#p_oidc"/></animateMotion>
+  <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+     values="0;0;1;1;0;0" keyTimes="0;0.300;0.305;0.380;0.385;1"/>
+</circle>
+</svg>
