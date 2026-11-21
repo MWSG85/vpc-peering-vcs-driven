@@ -143,20 +143,51 @@ resource "tfe_run_trigger" "this" {
   sourceable_id = tfe_workspace.this[each.value.source].id
 }
 
-# ---------- 5. OPA policy set (from /policies in the same repo) ----------
-resource "tfe_policy_set" "opa" {
-  name          = "${var.project_name}-opa"
-  description   = "OPA guardrails for ${var.project_name}"
-  kind          = "opa"
-  overridable   = false
-  policies_path = "policies"
-
-  vcs_repo {
-    identifier         = var.github_repo
-    branch             = var.github_branch
-    oauth_token_id     = var.oauth_token_id
-    ingress_submodules = false
+# ---------- 5. OPA policies (individually managed - works on the Free plan) ----------
+# Free plan does not allow VCS-connected ("versioned") policy sets, so each .rego
+# file in /policies is uploaded as its own tfe_policy, then grouped into a set.
+locals {
+  opa_policies = {
+    mandatory_tags = {
+      file  = "mandatory_tags.rego"
+      query = "data.terraform.policies.mandatory_tags.deny"
+      mode  = "mandatory"
+    }
+    allowed_instance_types = {
+      file  = "instance_type.rego"
+      query = "data.terraform.policies.instance_type.deny"
+      mode  = "mandatory"
+    }
+    no_public_ssh = {
+      file  = "no_public_ssh.rego"
+      query = "data.terraform.policies.no_public_ssh.deny"
+      mode  = "mandatory"
+    }
+    vpc_cidr_range = {
+      file  = "vpc_cidr.rego"
+      query = "data.terraform.policies.vpc_cidr.deny"
+      mode  = "advisory"
+    }
   }
+}
+
+resource "tfe_policy" "opa" {
+  for_each = local.opa_policies
+
+  name         = replace(each.key, "_", "-")
+  description  = "OPA policy ${each.key} for ${var.project_name}"
+  kind         = "opa"
+  query        = each.value.query
+  enforce_mode = each.value.mode
+  policy       = file("${path.module}/../policies/${each.value.file}")
+}
+
+resource "tfe_policy_set" "opa" {
+  name        = "${var.project_name}-opa"
+  description = "OPA guardrails for ${var.project_name}"
+  kind        = "opa"
+  overridable = false
+  policy_ids  = [for p in tfe_policy.opa : p.id]
 }
 
 resource "tfe_project_policy_set" "opa" {
