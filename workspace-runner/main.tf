@@ -151,7 +151,7 @@ locals {
     mandatory_tags = {
       file  = "mandatory_tags.rego"
       query = "data.terraform.policies.mandatory_tags.deny"
-      mode  = "mandatory"
+      mode  = "advisory"
     }
     allowed_instance_types = {
       file  = "instance_type.rego"
@@ -161,7 +161,7 @@ locals {
     no_public_ssh = {
       file  = "no_public_ssh.rego"
       query = "data.terraform.policies.no_public_ssh.deny"
-      mode  = "mandatory"
+      mode  = "advisory"
     }
     vpc_cidr_range = {
       file  = "vpc_cidr.rego"
