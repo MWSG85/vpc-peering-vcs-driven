@@ -21,7 +21,7 @@ variable "environment" {
 
 variable "instance_type" {
   type    = string
-  default = "t3.micro"
+  default = "t3.large"
 }
 
 variable "key_name" {
@@ -29,3 +29,4 @@ variable "key_name" {
   type        = string
   default     = null
 }
+# OPA test: t3.large should be blocked
