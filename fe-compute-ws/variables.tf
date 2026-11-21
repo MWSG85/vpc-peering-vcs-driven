@@ -29,3 +29,4 @@ variable "key_name" {
   type        = string
   default     = null
 }
+# OPA test: t3.large should be blocked
